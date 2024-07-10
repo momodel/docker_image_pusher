@@ -4,7 +4,7 @@
 2、在Action中查看执行进度
 ![image](https://github.com/momodel/docker_image_pusher/assets/112376483/2785eb0d-fff6-486d-897d-8e0a77b59e8a)
 3、拉取镜像：
-docker pull registry.cn-hangzhou.aliyuncs.com/magicalion/XXX:XXX(XXX更换为上面修改并执行的镜像名称以及TAG)
+docker pull registry.cn-hangzhou.aliyuncs.com/magicalion/XXX:XXX  (XXX部分更换为上面修改并执行的镜像名称以及TAG)
 
 # Docker Images Pusher
 
