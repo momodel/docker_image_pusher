@@ -1,4 +1,4 @@
-redis:7.0-bullseye
+postgres:16.3-bullseye
 ##支持私库
 #k8s.gcr.io/kube-state-metrics/kube-state-metrics:v2.0.0
 #xhofe/alist:latest
