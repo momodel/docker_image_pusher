@@ -4,4 +4,4 @@ jumpserver/web:v4.0.2-ce
 #xhofe/alist:latest
 ##支持指定架构
 #--platform=linux/arm64 xiaoyaliu/alist
-python:3.9
+python:3.8
