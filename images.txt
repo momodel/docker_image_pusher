@@ -4,10 +4,10 @@ jumpserver/web:v4.0.2-ce
 #xhofe/alist:latest
 ##支持指定架构
 #--platform=linux/arm64 xiaoyaliu/alist
-python:3.8
-python:3.9
-python:3.9.19
-ubuntu:22.04
-nvidia/cuda:12.1.1-cudnn8-devel-ubuntu20.04
-nvidia/cuda:11.6.1-cudnn8-devel-ubuntu20.04
+#python:3.8
+#python:3.9
+#python:3.9.19
+#ubuntu:22.04
+#nvidia/cuda:12.1.1-cudnn8-devel-ubuntu20.04
+#nvidia/cuda:11.6.1-cudnn8-devel-ubuntu20.04
 nvidia/cuda:11.8.0-cudnn8-devel-ubuntu20.04
