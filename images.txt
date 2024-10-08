@@ -1,4 +1,4 @@
-onlyoffice/communityserver:12.0.1.1748
+onlyoffice/elasticsearch:7.16.3
 ##支持私库
 #k8s.gcr.io/kube-state-metrics/kube-state-metrics:v2.0.0
 #xhofe/alist:latest
