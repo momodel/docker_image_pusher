@@ -13,4 +13,5 @@
 #nvidia/cuda:11.8.0-cudnn8-devel-ubuntu20.04
 #magicalion/kaggle:latest
 #ghcr.io/openfaas/gateway:0.27.11
-openfaas/gateway:0.18.2
+#openfaas/gateway:0.18.2
+--platform=linux/arm64 ubuntu:18.04
