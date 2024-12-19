@@ -16,3 +16,4 @@
 #ghcr.io/openfaas/gateway:0.27.11
 #openfaas/gateway:0.18.2
 python:3.8.2
+--platform=linux/arm64/v8
