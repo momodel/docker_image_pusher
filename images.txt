@@ -19,3 +19,4 @@ nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 #ghcr.io/openfaas/gateway:0.27.11
 #openfaas/gateway:0.18.2
 #python:3.8
+python:3.11-slim-bullseye
