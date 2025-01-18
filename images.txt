@@ -19,4 +19,4 @@
 #ghcr.io/openfaas/gateway:0.27.11
 #openfaas/gateway:0.18.2
 #python:3.8
-bgio/build:centos7-python3.11
+ubuntu:22.04
