@@ -19,4 +19,4 @@
 #ghcr.io/openfaas/gateway:0.27.11
 #openfaas/gateway:0.18.2
 #python:3.8
-lablup/python:3.11-ubuntu22.04
+brikerman/python:3.11.9..ubuntu--22.04
