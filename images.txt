@@ -19,4 +19,4 @@
 #ghcr.io/openfaas/gateway:0.27.11
 #openfaas/gateway:0.18.2
 #python:3.8
-docker.io/jettech/kube-webhook-certgen:v1.5.2
+lablup/python:3.11-ubuntu22.04
