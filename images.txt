@@ -9,7 +9,7 @@
 #--platform=linux/arm64
 #xiaoyaliu/alist
 #python:3.8
-#python:3.9
+python:3.9
 #python:3.9.19
 #ubuntu:22.04
 #nvidia/cuda:12.1.1-cudnn8-devel-ubuntu20.04
@@ -19,4 +19,4 @@
 #ghcr.io/openfaas/gateway:0.27.11
 #openfaas/gateway:0.18.2
 #python:3.8
-flannel/flannel:v0.22.0
+#flannel/flannel:v0.22.0
