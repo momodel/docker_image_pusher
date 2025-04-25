@@ -18,7 +18,5 @@
 #ghcr.io/openfaas/gateway:0.27.11
 #openfaas/gateway:0.18.2
 #python:3.8
-#flannel/flannel:v0.22.0
-docker.elastic.co/elasticsearch/elasticsearch:7.6.0
-docker.elastic.co/kibana/kibana:7.6.0
+wurstmeister/zookeeper:3.4.6
 
