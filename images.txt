@@ -11,7 +11,6 @@
 #python:3.8
 #python:3.9
 #python:3.9.19
-ubuntu:20.04
 #nvidia/cuda:12.1.1-cudnn8-devel-ubuntu20.04
 #nvidia/cuda:11.6.1-cudnn8-devel-ubuntu20.04
 #nvidia/cuda:11.8.0-cudnn8-devel-ubuntu20.04
@@ -20,4 +19,12 @@ ubuntu:20.04
 #openfaas/gateway:0.18.2
 #python:3.8
 #flannel/flannel:v0.22.0
-python:3.9-slim
+jark/demo-sql-client:0.2
+flink:1.11.0-scala_2.11
+jark/datagen:0.2
+jark/mysql-example:0.2
+wurstmeister/zookeeper:3.4.6
+wurstmeister/kafka:2.12-2.2.1
+docker.elastic.co/elasticsearch/elasticsearch:7.6.0
+docker.elastic.co/kibana/kibana:7.6.0
+
