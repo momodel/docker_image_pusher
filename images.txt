@@ -19,9 +19,6 @@
 #openfaas/gateway:0.18.2
 #python:3.8
 #flannel/flannel:v0.22.0
-jark/demo-sql-client:0.2
-flink:1.11.0-scala_2.11
-jark/datagen:0.2
 jark/mysql-example:0.2
 wurstmeister/zookeeper:3.4.6
 wurstmeister/kafka:2.12-2.2.1
