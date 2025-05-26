@@ -18,4 +18,5 @@
 #ghcr.io/openfaas/gateway:0.27.11
 #openfaas/gateway:0.18.2
 #python:3.8
-zookeeper:3.4.9
+#zookeeper:3.4.9
+ollama/ollama:latest
