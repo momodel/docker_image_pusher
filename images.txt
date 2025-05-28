@@ -21,4 +21,4 @@
 #zookeeper:3.4.9
 #ollama/ollama:latest
 
-jupyterhub/configurable-http-proxy
+jupyterhub/configurable-http-proxy:4.6.2
