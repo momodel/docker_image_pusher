@@ -19,4 +19,6 @@
 #openfaas/gateway:0.18.2
 #python:3.8
 #zookeeper:3.4.9
-ollama/ollama:latest
+#ollama/ollama:latest
+
+quay.io/jupyterhub/jupyterhub
