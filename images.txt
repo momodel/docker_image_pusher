@@ -21,4 +21,4 @@
 #zookeeper:3.4.9
 #ollama/ollama:latest
 
-quay.io/jupyterhub/jupyterhub
+jupyterhub/jupyterhub:5.3.0
