@@ -21,5 +21,12 @@
 #zookeeper:3.4.9
 #ollama/ollama:latest
 
-docker.n8n.io/n8nio/n8n
-
+langgenius/dify-api:1.6.0
+langgenius/dify-web:1.6.0
+postgres:15-alpine
+nginx:latest
+langgenius/dify-plugin-daemon:0.1.3-local
+redis:6-alpine
+langgenius/dify-sandbox:0.2.12
+ubuntu/squid:latest
+semitechnologies/weaviate:1.19.0
