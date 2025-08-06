@@ -20,8 +20,6 @@
 #python:3.8
 #zookeeper:3.4.9
 #ollama/ollama:latest
-postgres:12
---platform=linux/arm64
 
 
 docker.io/docker/dockerfile:1.4
