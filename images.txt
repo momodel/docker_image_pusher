@@ -22,3 +22,6 @@
 #ollama/ollama:latest
 postgres:12
 --platform=linux/arm64
+
+
+docker.io/docker/dockerfile:1.4
