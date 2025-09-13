@@ -20,4 +20,6 @@
 #python:3.8
 #zookeeper:3.4.9
 #ollama/ollama:latest
-docker.io/rancher/mirrored-flannelcni-flannel:v0.19.2
+#docker.io/rancher/mirrored-flannelcni-flannel:v0.19.2
+
+nicolaka/netshoot
