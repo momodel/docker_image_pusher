@@ -21,4 +21,4 @@
 #zookeeper:3.4.9
 #ollama/ollama:latest
 #docker.io/rancher/mirrored-flannelcni-flannel:v0.19.2
-liangjw/kube-webhook-certgen:v1.1.1
+alpine:3.18
