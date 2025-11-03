@@ -21,4 +21,4 @@
 #zookeeper:3.4.9
 #ollama/ollama:latest
 #docker.io/rancher/mirrored-flannelcni-flannel:v0.19.2
-alpine:3.18
+linuxserver/openssh-server:latest
