@@ -23,4 +23,5 @@
 #docker.io/rancher/mirrored-flannelcni-flannel:v0.19.2
 #linuxserver/openssh-server:latest
 #quay.io/coreos/etcd:v3.5.18
-minio/minio:RELEASE.2024-12-18T13-15-44Z
+#minio/minio:RELEASE.2024-12-18T13-15-44Z
+milvusdb/milvus:v2.6.6
