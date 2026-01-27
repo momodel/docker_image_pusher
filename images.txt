@@ -25,4 +25,7 @@
 #zilliz/attu:v2.6
 #apache/airflow:2.5.0-python3.7
 #python:3.7-slim-buster
-apache/airflow:3.0.6-python3.9
+#apache/airflow:3.0.6-python3.9
+postgres:13
+redis:latest
+
