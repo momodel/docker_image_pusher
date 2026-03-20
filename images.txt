@@ -35,4 +35,4 @@
 #docker.io/bitnamilegacy/elasticsearch:8.12.0
 #kafka
 #prom/prometheus:v3.5.1
-grafana/grafana:latest
+ubuntu:18.04
