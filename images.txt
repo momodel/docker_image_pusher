@@ -36,4 +36,4 @@
 #kafka
 #prom/prometheus:v3.5.1
 #ubuntu:22.04
-ghcr.io/mlflow/mlflow:v3.1.4
+docker.io/projecthami/hami:v2.8.0
