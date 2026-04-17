@@ -36,4 +36,4 @@
 #kafka
 #prom/prometheus:v3.5.1
 #ubuntu:22.04
-node:22-alpine
+maven:3.9.9-eclipse-temurin-17
