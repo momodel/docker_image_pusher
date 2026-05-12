@@ -40,4 +40,5 @@
 # docker.io/projecthami/hami:v2.8.3
 # jupyterhub/configurable-http-proxy:4.3.2
 # python:3.11-slim-bullseye
-node:18.20.8-bullseye-slim
+#node:18.20.8-bullseye-slim
+redis:6.2.22
