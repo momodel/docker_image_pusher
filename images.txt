@@ -50,5 +50,6 @@
 #python:3.10-slim
 # postgres:16-alpine
 # --platform=linux/arm64 pgvector/pgvector:0.8.6-pg16-bookworm
-#--platform=linux/arm64 mysql:8.0.39
-python:3.11-slim-bullseye
+# --platform=linux/arm64 mysql:8.0.39
+# python:3.11-slim-bullseye
+--platform=linux/arm64 mariadb:10.6.17
