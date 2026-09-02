@@ -54,4 +54,5 @@
 # python:3.11-slim-bullseye
 # --platform=linux/arm64 mariadb:10.6.17
 #--platform=linux/arm64 openviking/openviking:v0.4.16.dev10
-node:22-bookworm-slim
+#node:22-bookworm-slim
+nginx:1.27-alpine
