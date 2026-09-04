@@ -57,4 +57,5 @@
 #node:22-bookworm-slim
 # nginx:1.27-alpine
 # ubuntu:noble-20260810
-nvidia/cuda:12.6.3-cudnn-devel-ubuntu24.04
+# nvidia/cuda:12.6.3-cudnn-devel-ubuntu24.04
+ubuntu:focal-20250404
