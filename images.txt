@@ -59,4 +59,5 @@
 # ubuntu:noble-20260810
 # nvidia/cuda:12.6.3-cudnn-devel-ubuntu24.04
 # ubuntu:focal-20250404
-nvidia/cuda:12.6.3-cudnn-devel-ubuntu20.04
+# nvidia/cuda:12.6.3-cudnn-devel-ubuntu20.04
+nvidia/cuda:12.2.2-cudnn8-devel-ubuntu20.04
