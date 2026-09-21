@@ -62,4 +62,6 @@
 # nvidia/cuda:12.6.3-cudnn-devel-ubuntu20.04
 #nvidia/cuda:12.2.2-cudnn8-devel-ubuntu20.04
 #dataelement/bisheng-backend:base.v10
-openfga/openfga:v1.15.1
+#openfga/openfga:v1.15.1
+searxng/searxng:latest
+valkey/valkey:9-alpine
