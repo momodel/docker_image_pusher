@@ -64,4 +64,9 @@
 #dataelement/bisheng-backend:base.v10
 #openfga/openfga:v1.15.1
 #searxng/searxng:latest
-valkey/valkey:9-alpine
+#valkey/valkey:9-alpine
+python:3.12-slim
+node:22
+node:22-slim
+docker:27-cli
+docker/dockerfile:1
