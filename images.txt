@@ -67,6 +67,7 @@
 #valkey/valkey:9-alpine
 #python:3.12-slim
 #node:22
-node:22-slim
-docker:27-cli
-docker/dockerfile:1
+#node:22-slim
+#docker:27-cli
+#docker/dockerfile:1
+ghcr.io/volcengine/openviking:v0.5.0
