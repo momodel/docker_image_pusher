@@ -70,4 +70,5 @@
 #node:22-slim
 #docker:27-cli
 #docker/dockerfile:1
-ghcr.io/volcengine/openviking:v0.5.0
+#ghcr.io/volcengine/openviking:v0.5.0
+ghcr.io/searxng/searxng:2026.10.28-c360868e5
