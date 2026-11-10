@@ -74,4 +74,5 @@
 #ghcr.io/searxng/searxng:2026.10.28-c360868e5
 #nginx:stable-alpine
 #node:24-bookworm-slim
-nginx:stable
+#nginx:stable
+python:3.12.12-slim-bookworm
