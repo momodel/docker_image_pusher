@@ -75,4 +75,5 @@
 #nginx:stable-alpine
 #node:24-bookworm-slim
 #nginx:stable
-python:3.12.12-slim-bookworm
+#python:3.12.12-slim-bookworm
+calciumion/new-api:v1.0.0-rc.49
