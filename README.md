@@ -10,7 +10,7 @@ docker pull registry.cn-hangzhou.aliyuncs.com/magicalion/XXX:XXX  (XXX部分更�
 
 使用Github Action将国外的Docker镜像转存到阿里云私有仓库，供国内服务器使用，免费易用<br>
 - 支持DockerHub, gcr.io, k8s.io, ghcr.io等任意仓库<br>
-- 支持最大40GB的大型镜像<br>
+- 使用 Skopeo 在镜像仓库间直接复制，GitHub runner 无需将镜像拉到 Docker 本地镜像库再解包；实际大小限制取决于目标仓库和任务运行时间<br>
 - 使用阿里云的官方线路，速度快<br>
 
 视频教程：https://www.bilibili.com/video/BV1Zn4y19743/
@@ -86,3 +86,4 @@ xiaoyaliu/alist
 修改/.github/workflows/docker.yaml文件
 添加 schedule即可定时执行(此处cron使用UTC时区)
 ![](doc/定时执行.png)
+
