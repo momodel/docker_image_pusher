@@ -6,64 +6,42 @@ on:
     branches: [ main ]
 
 
-env:
-  ALIYUN_REGISTRY: "${{ secrets.ALIYUN_REGISTRY }}"
-  ALIYUN_NAME_SPACE: "${{ secrets.ALIYUN_NAME_SPACE }}"
-  ALIYUN_REGISTRY_USER: "${{ secrets.ALIYUN_REGISTRY_USER }}"
-  ALIYUN_REGISTRY_PASSWORD: "${{ secrets.ALIYUN_REGISTRY_PASSWORD }}"
-
 jobs:
 
   build:
     name: Pull
     runs-on: ubuntu-latest
     steps:
-    - name: Before freeing up disk space
-      run: |
-        echo "Before freeing up disk space"
-        echo "=============================================================================="
-        df -hT
-        echo "=============================================================================="
-
-    # 增加可用磁盘空间
-    - name: Maximize build space
-      uses: easimon/maximize-build-space@master
-      with:
-
-        root-reserve-mb: 2048
-        swap-size-mb: 128
-        remove-dotnet: 'true'
-        remove-haskell: 'true'
-        # 如果空间还是不够用，可以把以下开启，清理出更多空间
-        # remove-android: 'true'
-        # remove-codeql: 'true'
-        build-mount-path: '/var/lib/docker/'
-
-    - name: Restart docker
-      run: sudo service docker restart
-
-    - name: Free up disk space complete
-      run: |
-        echo "Free up disk space complete"
-        echo "=============================================================================="
-        df -hT
-        echo "=============================================================================="
-
     - name: Checkout Code
       uses: actions/checkout@v4
+      with:
+        persist-credentials: false
 
-    - name: Docker Setup Buildx
-      uses: docker/setup-buildx-action@v3
-
-    - name: Build and push image Aliyun
+    - name: Install Skopeo
       run: |
-        docker login -u $ALIYUN_REGISTRY_USER -p $ALIYUN_REGISTRY_PASSWORD $ALIYUN_REGISTRY
+        sudo apt-get update
+        sudo apt-get install -y skopeo
+
+    - name: Copy images to Aliyun
+      shell: bash
+      env:
+        ALIYUN_REGISTRY: "${{ secrets.ALIYUN_REGISTRY }}"
+        ALIYUN_NAME_SPACE: "${{ secrets.ALIYUN_NAME_SPACE }}"
+        ALIYUN_REGISTRY_USER: "${{ secrets.ALIYUN_REGISTRY_USER }}"
+        ALIYUN_REGISTRY_PASSWORD: "${{ secrets.ALIYUN_REGISTRY_PASSWORD }}"
+      run: |
+        auth_dir=$(mktemp -d)
+        auth_file="$auth_dir/auth.json"
+        trap 'rm -f -- "$auth_file"; rmdir -- "$auth_dir"' EXIT
+        printf '%s\n' "$ALIYUN_REGISTRY_PASSWORD" |
+          skopeo login --authfile "$auth_file" --username "$ALIYUN_REGISTRY_USER" --password-stdin "$ALIYUN_REGISTRY"
         # 数据预处理,判断镜像是否重名
         declare -A duplicate_images
         declare -A temp_map
         while IFS= read -r line || [ -n "$line" ]; do
             # 忽略空行与注释
-            [[ -z "$line" ]] && continue
+            line=${line%$'\r'}
+            [[ "$line" =~ ^[[:space:]]*$ ]] && continue
             if echo "$line" | grep -q '^\s*#'; then
                 continue
             fi
@@ -86,7 +64,7 @@ jobs:
             echo "image_name: $image_name"
             
             # 如果镜像存在于数组中，则添加temp_map
-            if [[ -n "${temp_map[$image_name]}" ]]; then
+            if [[ -n "${temp_map[$image_name]:-}" ]]; then
                  # 如果temp_map已经存在镜像名，判断是不是同一命名空间
                  if [[ "${temp_map[$image_name]}" != $name_space  ]]; then
                     echo "duplicate image name: $image_name"
@@ -101,57 +79,57 @@ jobs:
         
         while IFS= read -r line || [ -n "$line" ]; do
             # 忽略空行与注释
-            [[ -z "$line" ]] && continue
+            line=${line%$'\r'}
+            [[ "$line" =~ ^[[:space:]]*$ ]] && continue
             if echo "$line" | grep -q '^\s*#'; then
                 continue
             fi
         
-            echo "docker pull $line"
-            docker pull $line
-            platform=$(echo "$line" | awk -F'--platform[ =]' '{if (NF>1) print $2}' | awk '{print $1}')
-            echo "platform is $platform"
-            # 如果存在架构信息 将架构信息拼到镜像名称前面
-            if [ -z "$platform" ]; then
-                platform_prefix=""
-            else
+            platform_options=()
+            platform_prefix=""
+            if [[ "$line" =~ ^[[:space:]]*--platform[=[:space:]]+([^[:space:]]+)[[:space:]]+([^[:space:]]+)[[:space:]]*$ ]]; then
+                platform=${BASH_REMATCH[1]}
+                image=${BASH_REMATCH[2]}
+                if [[ ! "$platform" =~ ^([a-z0-9]+)/([a-z0-9_]+)(/([a-z0-9]+))?$ ]]; then
+                    printf 'Invalid platform: %s\n' "$platform" >&2
+                    exit 1
+                fi
+                platform_options=(--override-os "${BASH_REMATCH[1]}" --override-arch "${BASH_REMATCH[2]}")
+                if [[ -n "${BASH_REMATCH[4]:-}" ]]; then
+                    platform_options+=(--override-variant "${BASH_REMATCH[4]}")
+                fi
                 platform_prefix="${platform//\//_}_"
+            elif [[ "$line" =~ ^[[:space:]]*([[:alnum:]][^[:space:]]*)[[:space:]]*$ ]]; then
+                image=${BASH_REMATCH[1]}
+            else
+                printf 'Invalid images.txt entry: %s\n' "$line" >&2
+                exit 1
             fi
-            echo "platform_prefix is $platform_prefix"
-            # 获取镜像的完整名称，例如kasmweb/nginx:1.25.3（命名空间/镜像名:版本号）
-            image=$(echo "$line" | awk '{print $NF}')
+            image_without_digest=${image%%@*}
 
             # 获取 镜像名:版本号  例如nginx:1.25.3
-            image_name_tag=$(echo "$image" | awk -F'/' '{print $NF}')
+            image_name_tag=$(echo "$image_without_digest" | awk -F'/' '{print $NF}')
             # 获取命名空间 例如kasmweb  这里有种特殊情况 docker.io/nginx，把docker.io当成命名空间，也OK
-            name_space=$(echo "$image" | awk -F'/' '{if (NF==3) print $2; else if (NF==2) print $1; else print ""}')
+            name_space=$(echo "$image_without_digest" | awk -F'/' '{if (NF==3) print $2; else if (NF==2) print $1; else print ""}')
             # 获取镜像名例  例如nginx
             image_name=$(echo "$image_name_tag" | awk -F':' '{print $1}')
         
             name_space_prefix=""
             # 如果镜像名重名
-            if [[ -n "${duplicate_images[$image_name]}" ]]; then
+            if [[ -n "${duplicate_images[$image_name]:-}" ]]; then
                #如果命名空间非空，将命名空间加到前缀
                if [[ -n "${name_space}" ]]; then
                   name_space_prefix="${name_space}_"
                fi
             fi
             
-            # 将@sha256:等字符删除
-            image_name_tag="${image_name_tag%%@*}"
+            if [[ "$image_name_tag" != *:* ]]; then
+                image_name_tag="$image_name_tag:latest"
+            fi
             new_image="$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$platform_prefix$name_space_prefix$image_name_tag"
-            echo "docker tag $image $new_image"
-            docker tag $image $new_image
-            echo "docker push $new_image"
-            docker push $new_image
-            echo "开始清理磁盘空间"
-            echo "=============================================================================="
-            df -hT
-            echo "=============================================================================="
-            docker rmi $image
-            docker rmi $new_image
-            echo "磁盘空间清理完毕"
-            echo "=============================================================================="
-            df -hT
-            echo "=============================================================================="     
+            printf 'Copy %s -> %s\n' "$image" "$new_image"
+            skopeo "${platform_options[@]}" copy --authfile "$auth_file" --retry-times 3 \
+              "docker://$image" "docker://$new_image"
             
         done < images.txt
+
