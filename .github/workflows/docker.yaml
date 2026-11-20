@@ -131,5 +131,19 @@ jobs:
             skopeo "${platform_options[@]}" copy --authfile "$auth_file" --retry-times 3 \
               "docker://$image" "docker://$new_image"
             
+            # Read the destination tag back from Aliyun before reporting success.
+            if [[ -n "$platform_prefix" ]]; then
+                actual_platform=$(skopeo inspect --authfile "$auth_file" --config "docker://$new_image" |
+                  jq -er '.os + "/" + .architecture')
+                expected_platform="${platform%/*}"
+                if [[ "$platform" != */*/* ]]; then expected_platform="$platform"; fi
+                if [[ "$actual_platform" != "$expected_platform" ]]; then
+                    printf 'Destination platform mismatch: expected %s, got %s for %s\n' "$expected_platform" "$actual_platform" "$new_image" >&2
+                    exit 1
+                fi
+                remote_digest=$(skopeo inspect --authfile "$auth_file" --format '{{.Digest}}' "docker://$new_image")
+                printf 'Verified destination %s platform=%s digest=%s\n' "$new_image" "$actual_platform" "$remote_digest"
+            fi
+
         done < images.txt
 
